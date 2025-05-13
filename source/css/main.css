@@ -212,7 +212,7 @@ td, th {
 body {
     position: relative;
     font-family: "PingFang SC", "Microsoft YaHei", Lato, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 2;
     color: #555;
     background: #f5f7f9
@@ -588,7 +588,7 @@ code {
     color: #555;
     background: #eee;
     border-radius: 3px;
-    font-size: 13px
+    font-size: 14px
 }
 
 pre {
@@ -3464,7 +3464,7 @@ body {
 
 a {
     border-bottom: 0;
-    color: #888
+    color: #29d
 }
 
 .btn {
@@ -7219,10 +7219,36 @@ body {
     color: #666;
 }
 
-.toc > ol > li:before {
+/* .toc > ol > li:before {
     content: counter(sectioncounter) ". ";
     counter-increment: sectioncounter;
+} */
+
+/* 1. 关闭默认列表样式，并在最外层 ol 上初始化计数器 */
+.toc ol {
+  list-style: none;
+  counter-reset: section;
+  margin: 0;
+  padding: 0;
 }
+
+/* 2. 每遇到一个 li，就让计数器增加 */
+.toc li {
+  counter-increment: section;
+  position: relative;
+  padding-left: 1em;            /* 给数字留空间 */
+  margin: .5em 0;
+}
+
+/* 3. 在每个 li 前面插入由 counters() 生成的多级编号 */
+.toc li::before {
+  content: counters(section, ".") ". ";
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  /* 如有需要可再加字体与颜色等样式 */
+}
+
 
 .is-active-li,
 .is-active-link,
@@ -7232,7 +7258,7 @@ body {
 }
 
 .toc-list {
-    padding-left: 15px !important;
+    padding-left: 10px !important;
 }
 
 @media (max-width: 991px) {
